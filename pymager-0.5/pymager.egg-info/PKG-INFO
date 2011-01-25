@@ -1,0 +1,10 @@
+Metadata-Version: 1.0
+Name: pymager
+Version: 0.5
+Summary: image conversion and rescaling RESTful web service
+Home-page: http://opensource.sirika.com/pymager
+Author: Sami Dalouche
+Author-email: sami.dalouche@gmail.com
+License: Apache-2.0
+Description: pymager is an image processing web service.Once images are uploaded using a RESTful web API,  it is possible to request any derivative of the image based on a different size or image format.
+Platform: UNKNOWN

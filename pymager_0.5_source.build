@@ -1,0 +1,53 @@
+ dpkg-buildpackage -rfakeroot -d -us -uc -S -sa
+dpkg-buildpackage: export CFLAGS from dpkg-buildflags (origin: vendor): -g -O2
+dpkg-buildpackage: export CPPFLAGS from dpkg-buildflags (origin: vendor): 
+dpkg-buildpackage: export CXXFLAGS from dpkg-buildflags (origin: vendor): -g -O2
+dpkg-buildpackage: export FFLAGS from dpkg-buildflags (origin: vendor): -g -O2
+dpkg-buildpackage: export LDFLAGS from dpkg-buildflags (origin: vendor): -Wl,-Bsymbolic-functions
+dpkg-buildpackage: source package pymager
+dpkg-buildpackage: source version 0.5
+dpkg-buildpackage: source changed by Sami Dalouche <sami.dalouche@gmail.com>
+ dpkg-source --before-build pymager-0.5
+ fakeroot debian/rules clean
+pyversions: missing X(S)-Python-Version in control file, fall back to debian/pyversions
+test -x debian/rules
+dh_testroot
+dh_clean 
+cd . && python setup.py clean -a
+running clean
+'build/lib.linux-x86_64-2.6' does not exist -- can't clean it
+'build/bdist.linux-x86_64' does not exist -- can't clean it
+'build/scripts-2.6' does not exist -- can't clean it
+rm -rf debian/python-module-stampdir
+find . -name '*.pyc' -exec rm '{}' ';'
+find . -prune -name '*.egg-info' -exec rm -rf '{}' ';'
+/usr/bin/make -f debian/rules reverse-config
+pyversions: missing X(S)-Python-Version in control file, fall back to debian/pyversions
+make[1]: Entering directory `/home/sdalouche/workspace/pymager/pymager-debian/pymager-0.5'
+make[1]: Nothing to be done for `reverse-config'.
+make[1]: Leaving directory `/home/sdalouche/workspace/pymager/pymager-debian/pymager-0.5'
+if [ -d "." ]; then \
+	  cd . && QUILT_PATCHES=/home/sdalouche/workspace/pymager/pymager-debian/pymager-0.5/debian/patches quilt --quiltrc /dev/null pop -a -R || test $? = 2 ; \
+	fi
+No patch removed
+rm -rf ./.pc
+rm -f debian/stamp-patch*
+ dpkg-source -b pymager-0.5
+dpkg-source: info: using source format `3.0 (quilt)'
+dpkg-source: info: building pymager using existing ./pymager_0.5.orig.tar.gz
+dpkg-source: info: building pymager in pymager_0.5.debian.tar.gz
+dpkg-source: info: building pymager in pymager_0.5.dsc
+ dpkg-genchanges -S -sa >../pymager_0.5_source.changes
+dpkg-genchanges: including full source code in upload
+ dpkg-source --after-build pymager-0.5
+dpkg-buildpackage: full upload (original source is included)
+Now running lintian...
+W: pymager source: non-native-package-with-native-version
+W: pymager source: out-of-date-standards-version 3.8.4 (current is 3.9.1)
+Finished running lintian.
+Now signing changes and any dsc files...
+ signfile pymager_0.5.dsc Sami Dalouche <sami.dalouche@gmail.com>
+
+ signfile pymager_0.5_source.changes Sami Dalouche <sami.dalouche@gmail.com>
+
+Successfully signed dsc and changes files

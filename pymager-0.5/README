@@ -1,0 +1,84 @@
+Features
+========
+* Ability to resize and serve any picture supported by PIL
+* HTTP caching support (If-Modified-since / Last-Modified header, + Apache mod_headers)
+* Supports all databases supported by SQL Alchemy
+* can be deployed standalone (for development purposes) as well as behind Apache using mod_wsgi
+* RESTful interface, URLs, and returns HTTP Error codes (see error codes below)
+* Is supposed to handle locking correctly in case of pending requests for the same not-yet-processed derived image
+
+Install Dependencies
+$ sudo apt-get install  python-imaging python-sqlalchemy python-psycopg2 \ 
+  python-zope.interface python-cherrypy3 python-setuptools python-pkg-resources python-migrate
+
+Additional dependencies for developers :
+$ sudo apt-get install python-setuptools python-nose python-mox
+
+Run unit tests to make sure everything's fine
+$ python setup.py test
+
+Run the service in standalone mode
+$ python pymager-standalone.py 
+
+HTTP Error Codes that are returned
+* 304 : (resource not modified)
+* 400 
+ - {original} Unsupported Format (POST)
+ - DEV: {original} Invalid Multipart request (POST) : only for dev, should never happen if client is coded properly
+ - DEV: {derived} Invalid requested format (GET) : only for dev, should never happen if client does not allow requesting unknown image formats
+ - DEPRECATED: {original} Supplied ID does not use the correct ID format (POST) (FIXME: should disappear) : should never happen if client API checks ID format before submitting
+* 403
+ - Resize characteristics not allowed (GET)
+* 404
+ - {original, derived} Resource does not exist (GET, DELETE) 
+ - DEV: {derived} URL decoding error (GET) : should never happen if client generates URLs correctly
+* 405
+ - DEV: {original, derived}: the supported method is not authorized (e.g. DELETE issues on derived/) should never happen as clients are not supposed to expose more than is currently available
+* 409 
+ - Image ID already exists (POST)
+* 500
+ - various, unexpected errors (IO exceptions, etc..)
+
+Returned headers
+- Allowed methods (when 405)
+- Last-Modified
+- Content-Type (FIXME: is it returned ?)
+
+= Interface =
+/original/<ID>
+/derived/<ID>-<width>x<height>.<extension>
+
+- ID should match ([\w_-]+)\-(\d+)x(\d+)\.([a-zA-Z]+)
+- width and height should be integers (allowed sizes are configurable in pymager configuration file)
+
+Examples:
+  http://localhost:8000/derived/sample-100x100.jpg
+  http://localhost:8000/derived/sample-800x600.jpg
+
+
+What is not tested automatically (using integration or unit tests)
+* everything that is in Apache WSGi configuration (Authentication, Caching, etc..)
+* The image resize algorithm (whether it expands the image correctly, shrinks it correctly, etc..)
+* content type header of served file
+
+
+FIXME:
+* ASCII / Unicode / ID constraints should be re-checked and enforced.. for now, things are crashing at myscellaneous levels. 
+what kind of constraints do we want to enforce exactly ? Do we want unicode IDs ?
+
+
+Create release 
+==============
+git tag v0.5
+git push origin --tags
+python setup sdist
+re-create debian package
+
+IDE Setup
+=========
+
+Pydev
+* Install eclipse
+* Install Pydev
+* Activate Python interpreter
+* Setup test runner to 'nose'

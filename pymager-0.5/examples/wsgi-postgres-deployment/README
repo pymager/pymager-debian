@@ -1,0 +1,46 @@
+# copy the WSGI scripts in a place with read-only access for apache 
+sudo mkdir /srv/wsgi
+sudo cp srv/pymager-cherrypy.conf /srv/wsgi
+sudo cp srv/pymager.conf /srv/wsgi
+sudo cp srv/pymager.wsgi /srv/wsgi
+# create the list users that are able to upload new images
+sudo htpasswd -c /srv/wsgi/htpasswd sirika
+...
+
+sudo chown -R root:www-data /srv/wsgi
+sudo chmod 640 /srv/wsgi/htpasswd
+
+# create a work directory where apache with read+write access for apache
+sudo mkdir /srv/data
+sudo mkdir /srv/data/pymager
+sudo setfacl -m g:www-data:r-x /srv/data
+sudo setfacl -m g:www-data:rwx /srv/data/pymager
+sudo setfacl -d -m g:www-data:rwx /srv/data/pymager
+
+# install the pymager and apache 
+cd ..
+# FIXME: is there a better way (e.g. virtualenv..) ?
+sudo python setup.py install --prefix /usr/local
+sudo apt-get install libapache2-mod-wsgi
+
+sudo cp etc_apache_conf.d_wsgi /etc/apache2/conf.d/wsgi
+
+# enable apache mod-headers
+/etc/apache2/mods-enabled$ sudo ln -s ../mods-available/headers.load ./
+
+# You can now tweak the settings 
+vi /etc/apache2/conf.d/wsgi
+Ti /srv/wsgi/pymager.conf
+
+# To deploy it on postgres, for example :
+ create role pymager LOGIN PASSWORD 'pymager';
+ create database pymager with owner=pymager encoding='UTF8' tablespace=pg_default;
+and change etc/pymager.conf accordingly
+
+# Version-control the database
+cd migration
+python pymager_db/manage.py version_control postgres://pymager:pymager@localhost/pymager
+
+# upgrade the database
+python pymager_db/manage.py upgrade postgres://pymager:pymager@localhost/pymager
+

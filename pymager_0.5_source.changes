@@ -1,0 +1,39 @@
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
+
+Format: 1.8
+Date: Tue, 25 Jan 2011 15:36:24 -0500
+Source: pymager
+Binary: python-pymager
+Architecture: source
+Version: 0.5
+Distribution: maverick
+Urgency: low
+Maintainer: Sami Dalouche <sami.dalouche@gmail.com>
+Changed-By: Sami Dalouche <sami.dalouche@gmail.com>
+Description: 
+ python-pymager - RESTful image server featuring rescaling and conversion
+Changes: 
+ pymager (0.5) maverick; urgency=low
+ .
+   * New upstream release
+Checksums-Sha1: 
+ 8fc2bfb2843cc4853a792cdeb705848533752775 1088 pymager_0.5.dsc
+ 98b7fb985fac7269471250c9aa39a0774dde7369 4398175 pymager_0.5.orig.tar.gz
+ 689cd19d2ad6485754ec14ab205e00b2d58c0c97 2803 pymager_0.5.debian.tar.gz
+Checksums-Sha256: 
+ 188453b387c663b2a8a8297b90de12f150450060eaf77bb30f8ffd29f726f35e 1088 pymager_0.5.dsc
+ b8c48921973eefe1c28be23a43db60eda8e8e828ecc4669166f9ad9212a46054 4398175 pymager_0.5.orig.tar.gz
+ 679402a902eb1045e71501049fe084c1c4bca1eb6b9c4e97a7735e3506a66d32 2803 pymager_0.5.debian.tar.gz
+Files: 
+ aa2f19742779061e2d64b2b5cc91398d 1088 python extra pymager_0.5.dsc
+ dfdc4dc95367ca810d417b1ae5224d8b 4398175 python extra pymager_0.5.orig.tar.gz
+ eaffaa4fe79bb6449e86185e5e440f1f 2803 python extra pymager_0.5.debian.tar.gz
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
+
+iEYEARECAAYFAk0/RCYACgkQwUbKBMqSoXB6YwCfc1PNNYo5xXZnt46bK7YRVlt4
+ZSoAn2vCEMEH/oXewZXdSzYEAYHkk6j3
+=OAo/
+-----END PGP SIGNATURE-----

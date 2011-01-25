@@ -1,0 +1,37 @@
+Source: pymager
+Section: python
+Priority: extra
+Maintainer: Sami Dalouche <sami.dalouche@gmail.com>
+Build-Depends: cdbs, debhelper (>= 7), python, python-setuptools (>= 0.6c9), python-support (>= 1.0.4), quilt
+Standards-Version: 3.8.4
+Homepage: http://developers.sirika.com/pymager/
+
+Package: python-pymager
+Architecture: all
+Depends: ${python:Depends}, ${misc:Depends}, python-imaging, python-sqlalchemy (>=0.6.3), python-zope.interface, python-cherrypy3 (>=3.1), python-pkg-resources, python-migrate (>=0.6)
+Suggests: python-psycopg2, python-mysqldb
+Description: RESTful image server featuring rescaling and conversion
+ pymager is RESTful web service that provides image conversion as well as 
+ rescaling/thumbnailing support. 
+ .
+ The main features are :
+  * Simple retrieving of (converted/resized) images through HTTP GET
+  * Simple addition of images through HTTP POST
+  * Ability to resize and convert any image format supported by Python 
+    Imaging Library (PIL)
+  * Ability to store the image metadata in any database supported by 
+    SQLAlchemy. (The default settings store the metadata using an 
+    embedded database)
+  * Caching of converted images and HTTP-caching support 
+    (If-Modified-since, Last-Modified headers)
+  * Apache integration using mod_wsgi
+ .
+ Databases supported by SQLAlchemy :
+  * PostgreSQL
+  * SQLite
+  * MySQL
+  * Oracle
+  * Firebird
+  * MS-SQL, MSAccess
+  * Informix (experimental)
+  * DB2/Informix IDS (third party)

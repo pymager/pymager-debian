@@ -1,0 +1,18 @@
+pymager (0.5) maverick; urgency=low
+
+  * New upstream release
+
+ -- Sami Dalouche <sami.dalouche@gmail.com>  Tue, 25 Jan 2011 15:36:24 -0500
+
+pymager (0.4-0ubuntu1) lucid; urgency=low
+
+  * New upstream release
+
+ -- Sami Dalouche <sami.dalouche@gmail.com>  Thu, 01 Apr 2010 17:38:57 -0400
+
+pymager (0.3-1) lucid; urgency=low
+
+  * Initial release 
+  * Switch to dpkg-source 3.0 (quilt) format
+
+ -- Sami Dalouche <sami.dalouche@gmail.com>  Wed, 31 Mar 2010 20:59:51 -0400

@@ -1,0 +1,8 @@
+pymager for Debian
+------------------
+
+The default configuration bundled with pymager stores :
+ * image metadata in an embedded SQLite database (/... FIXME)
+ * images in /....
+
+ -- Sami Dalouche <sami.dalouche@gmail.com>  Wed, 31 Mar 2010 12:29:22 -0400
